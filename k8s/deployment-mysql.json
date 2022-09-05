@@ -1,0 +1,68 @@
+{
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+        "name": "mysql"
+    },
+    "spec": {
+        "replicas": 1,
+        "selector": {
+            "matchLabels": {
+                "app": "mysql",
+                "tier": "database"
+            }
+        },
+        "template": {
+            "metadata": {
+                "labels": {
+                    "app": "mysql",
+                    "tier": "database"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "MYSQL_ROOT_PASSWORD",
+                                "valueFrom": {
+                                    "secretKeyRef": {
+                                        "key": "password",
+                                        "name": "mysqlpassword"
+                                    }
+                                }
+                            }
+                        ],
+                        "image": "mariadb",
+                        "name": "mariadb",
+                        "ports": [
+                            {
+                                "containerPort": 3306
+                            }
+                        ],
+                        "resources": {
+                            "limits": {
+                                "cpu": "500m",
+                                "memory": "256Mi"
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/lib/mysql",
+                                "name": "mysqlvolume"
+                            }
+                        ]
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "mysqlvolume",
+                        "persistentVolumeClaim": {
+                            "claimName": "mysqlvolume"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
