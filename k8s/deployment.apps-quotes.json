@@ -48,6 +48,10 @@
                             {
                                 "name": "DB_PORT",
                                 "value": "3306"
+                            },
+                            {
+                                "name": "MISSION",
+                                "value": "Try harder!"
                             }
                         ],
                         "image": "quay.io/eugene_butan/quotes:v7",
