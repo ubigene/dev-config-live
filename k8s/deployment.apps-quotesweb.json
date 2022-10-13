@@ -23,7 +23,7 @@
             "spec": {
                 "containers": [
                     {
-                        "image": "quay.io/eugene_butan/quotesweb:v4",
+                        "image": "quay.io/eugene_butan/quotesweb:v6",
                         "imagePullPolicy": "Always",
                         "name": "quotesweb",
                         "ports": [
